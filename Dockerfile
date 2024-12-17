@@ -1,12 +1,14 @@
-# 選擇基礎 Python 映像檔
+# 使用 Python 3.11 作為基礎映像
 FROM python:3.11-slim
 
-# 設定工作目錄
+# 設置工作目錄
 WORKDIR /app
 
-# 複製 test01.py 到容器內
-COPY test01.py .
+# 複製程式碼到容器
+COPY . .
 
-# 設定執行的指令 (根據 test01.py 的執行邏輯修改)
-CMD ["python", "test01.py"]
+# 安裝 FastAPI 和 Uvicorn
+RUN pip install --no-cache-dir fastapi uvicorn python-multipart
 
+# 指定容器啟動命令
+CMD ["uvicorn", "test01:app", "--host", "0.0.0.0", "--port", "8000"]

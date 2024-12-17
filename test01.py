@@ -33,3 +33,7 @@ def get_user(user_id: str):
     with open(file_path, "r") as f:
         user_data = json.load(f)
     return {"user_data": user_data}
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
